@@ -12,12 +12,15 @@ searchForm.addEventListener("submit", async (event) => {
     return;
   }
 
+  weatherContainer.classList.add("hidden");
+  hideError();
+
   try {
     const geo = await fetchLocation(city);
     const weather = await fetchWeather(geo.latitude, geo.longitude);
 
     renderWeather(geo, weather);
-    hideError();
+    cityInput.value = "";
   } catch (err) {
     showError(err.message || "Impossible de récupérer les données météo.");
   }
@@ -119,13 +122,13 @@ function getWeatherLabel(code) {
     51: "bruine légère",
     53: "bruine modérée",
     55: "bruine dense",
-    56: "bruine verglaçante légère",
-    57: "bruine verglaçante dense",
+    56: "bruine verglacante légère",
+    57: "bruine verglacante dense",
     61: "pluie légère",
     63: "pluie modérée",
     65: "fortes pluies",
-    66: "pluie verglaçante légère",
-    67: "pluie verglaçante forte",
+    66: "pluie verglacante légère",
+    67: "pluie verglacante forte",
     71: "neige légère",
     73: "neige modérée",
     75: "fortes chutes de neige",
